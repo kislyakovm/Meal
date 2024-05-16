@@ -2,7 +2,7 @@ package com.example.meal;
 
 import java.util.ArrayList;
 
-public class Meal {
+public class Dish {
     private String id, name, category, area, instructions, picture, tag;
     ArrayList<String> ingredients;
 

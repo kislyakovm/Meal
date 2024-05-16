@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/listButton"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu"
+        android:title="list" />
+
+    <item
+        android:id="@+id/randomButton"
+        android:enabled="true"
+        android:icon="@drawable/ic_random"
+        android:title="random" />
+
+    <item
+        android:id="@+id/findButton"
+        android:enabled="true"
+        android:icon="@drawable/ic_find"
+        android:title="search"/>
+
+    <item
+        android:id="@+id/worldButton"
+        android:enabled="true"
+        android:icon="@drawable/ic_world"
+        android:title="international"/>
+</menu>
