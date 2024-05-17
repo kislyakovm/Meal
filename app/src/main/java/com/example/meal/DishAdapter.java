@@ -1,6 +1,7 @@
 package com.example.meal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         return dishes.size();
     }
 
-    public class DishViewHolder extends RecyclerView.ViewHolder {
+    public class DishViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView nameTextView, categoryTextView;
         public DishViewHolder(@NonNull View itemView) {
@@ -59,6 +60,16 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
             imageView = itemView.findViewById(R.id.imageView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             categoryTextView = itemView.findViewById(R.id.categoryTextView);
+
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
+        }
+
+        // переход с элемента списка блюд на страницу конкретного блюда
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context, MealPageActivity.class);
+            context.startActivity(intent);
         }
     }
 
