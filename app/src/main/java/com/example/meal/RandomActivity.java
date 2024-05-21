@@ -3,7 +3,9 @@ package com.example.meal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -90,7 +92,7 @@ public class RandomActivity extends AppCompatActivity {
 
                     String ingredient;
                     for (int j = 1; j <= 15; j++) {
-                        ingredient = jsonObject1.getString("strIngredient" + j) + jsonObject1.getString("strMeasure" + j);
+                        ingredient = jsonObject1.getString("strIngredient" + j) + " " + jsonObject1.getString("strMeasure" + j);
                         if (ingredient != null) {
                             ingredients.add(ingredient);
                         } else break;
@@ -107,18 +109,23 @@ public class RandomActivity extends AppCompatActivity {
 
                     ImageView dishRandomImageView;
                     TextView dishRandomTitleTextView, dishRandomCategoryTextView, dishRandomInstructionTextView;
-                    RecyclerView dishRandomIngredientsTextView;
+                    ListView dishPageIngredientsListView;
 
                     dishRandomImageView = findViewById(R.id.dishRandomImageView);
                     dishRandomTitleTextView = findViewById(R.id.dishRandomTitleTextView);
                     dishRandomCategoryTextView = findViewById(R.id.dishRandomCategoryTextView);
                     dishRandomInstructionTextView = findViewById(R.id.dishRandomInstructionTextView);
-                    dishRandomIngredientsTextView = findViewById(R.id.dishRandomIngredientsTextView);
+                    dishPageIngredientsListView = findViewById(R.id.dishRandomIngredientsTextView);
 
                     Picasso.get().load(dish.getPicture()).fit().centerCrop().into(dishRandomImageView);
                     dishRandomTitleTextView.setText(dish.getName());
                     dishRandomCategoryTextView.setText(dish.getCategory());
                     dishRandomInstructionTextView.setText(dish.getInstructions());
+
+                    if (ingredients != null) {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(RandomActivity.this, android.R.layout.simple_list_item_1, ingredients);
+                        dishPageIngredientsListView.setAdapter(adapter);
+                    }
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

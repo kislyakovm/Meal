@@ -29,7 +29,7 @@
             app:strokeWidth="2dp">
 
             <ImageView
-                android:id="@+id/dishRandomImageView"
+                android:id="@+id/dishPageImageView"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:contentDescription="dish image"
@@ -51,7 +51,7 @@
 
 
             <TextView
-                android:id="@+id/dishRandomTitleTextView"
+                android:id="@+id/dishPageTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
@@ -60,7 +60,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/dishRandomCategoryTextView"
+                android:id="@+id/dishPageCategoryTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -71,7 +71,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/dishRandomInstructionTextView"
+            android:id="@+id/dishPageInstructionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -83,14 +83,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dishRandomIngredientsTextView"
+        <ListView
+            android:id="@+id/dishPageIngredientsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dishRandomInstructionTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/dishPageInstructionTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

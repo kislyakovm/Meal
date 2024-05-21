@@ -38,11 +38,32 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         String image = currentDish.getPicture();
         String name = currentDish.getName();
         String category = currentDish.getCategory();
+        String area = currentDish.getArea();
+        String instructions = currentDish.getInstructions();
+        String tag = currentDish.getTag();
+        ArrayList<String> ingredients = currentDish.getIngredients();
 
         holder.nameTextView.setText(name);
         holder.categoryTextView.setText(category);
 
         Picasso.get().load(image).fit().centerCrop().into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MealPageActivity.class);
+
+                intent.putExtra("picture", dishes.get(position).getPicture());
+                intent.putExtra("name", dishes.get(position).getName());
+                intent.putExtra("category", dishes.get(position).getCategory());
+                intent.putExtra("area", dishes.get(position).getArea());
+                intent.putExtra("instructions", dishes.get(position).getInstructions());
+                intent.putExtra("tag", dishes.get(position).getTag());
+                intent.putStringArrayListExtra("ingredients", dishes.get(position).getIngredients());
+
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -51,7 +72,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         return dishes.size();
     }
 
-    public class DishViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class DishViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView nameTextView, categoryTextView;
         public DishViewHolder(@NonNull View itemView) {
@@ -61,16 +82,16 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
             nameTextView = itemView.findViewById(R.id.nameTextView);
             categoryTextView = itemView.findViewById(R.id.categoryTextView);
 
-            itemView.setClickable(true);
-            itemView.setOnClickListener(this);
+//            itemView.setClickable(true);
+//            itemView.setOnClickListener(this);
         }
 
         // переход с элемента списка блюд на страницу конкретного блюда
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(context, MealPageActivity.class);
-            context.startActivity(intent);
-        }
+//        @Override
+//        public void onClick(View v) {
+//            Intent intent = new Intent(context, MealPageActivity.class);
+//            context.startActivity(intent);
+//        }
     }
 
 }

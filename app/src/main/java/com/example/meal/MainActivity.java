@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
                         String ingredient;
                         for (int j = 1; j <= 15; j++) {
-                            ingredient = jsonObject1.getString("strIngredient" + j) + jsonObject1.getString("strMeasure" + j);
+                            ingredient = jsonObject1.getString("strIngredient" + j) + " " + jsonObject1.getString("strMeasure" + j);
                             if (ingredient != null) {
                                 ingredients.add(ingredient);
                             } else break;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Dish {
     private String id, name, category, area, instructions, picture, tag;
-    ArrayList<String> ingredients;
+    private ArrayList<String> ingredients;
 
     public String getId() {
         return id;
