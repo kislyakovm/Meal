@@ -81,17 +81,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
             imageView = itemView.findViewById(R.id.imageView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             categoryTextView = itemView.findViewById(R.id.categoryTextView);
-
-//            itemView.setClickable(true);
-//            itemView.setOnClickListener(this);
         }
-
-        // переход с элемента списка блюд на страницу конкретного блюда
-//        @Override
-//        public void onClick(View v) {
-//            Intent intent = new Intent(context, MealPageActivity.class);
-//            context.startActivity(intent);
-//        }
     }
 
 }

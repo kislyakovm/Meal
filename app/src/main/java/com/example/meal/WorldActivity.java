@@ -28,7 +28,7 @@ public class WorldActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        // объяснить почему так, а не через полчение всех стран (нет связи названия с картинкой. А в дальнейшем хотел бы свой API и там уже чтобы был норм доступ)
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/us.png","American"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/gb.png", "British"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/ca.png","Canadian"));
@@ -57,7 +57,6 @@ public class WorldActivity extends AppCompatActivity {
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/tr.png","Turkish"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/vn.png","Vietnamese"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/no.png","Other"));
-
 
         recyclerView = findViewById(R.id.recyclerViewWorld);
 

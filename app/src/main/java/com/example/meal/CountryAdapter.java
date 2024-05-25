@@ -43,15 +43,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
         holder.countryName.setText(countryName);
         Picasso.get().load(flagUrl).fit().centerCrop().into(holder.flag);
 
-//        holder.flag.setImageResource(imageId);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Тут мб нужно создать отдельную активити для списка блюд по стране
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra("flag", flagUrl);
-                intent.putExtra("countryName", countryName);
+                Intent intent = new Intent(context, DishListActivity.class);
+                intent.putExtra("url", "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + countryName);
+
                 context.startActivity(intent);
             }
         });
