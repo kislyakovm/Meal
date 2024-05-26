@@ -2,6 +2,9 @@ package com.example.meal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,9 +21,8 @@ import com.google.android.material.button.MaterialButtonToggleGroup;
 public class FindActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-    private SearchView searchView;
-
-
+//    private SearchView searchView;
+        private EditText searchEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,21 @@ public class FindActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        searchEditText = findViewById(R.id.searchEditText);
+        Button searchButton = findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = searchEditText.getText().toString();
+
+                Intent intent = new Intent(FindActivity.this, DishListActivity.class);
+                intent.putExtra("url", "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + searchText);
+
+                startActivity(intent);
+            }
         });
 
         requestQueue = Volley.newRequestQueue(this);
@@ -52,46 +69,47 @@ public class FindActivity extends AppCompatActivity {
             return true;
         });
 
-        searchView = findViewById(R.id.searchView);
-
-        // Обработка событий поиска
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                if (searchAMeal(query)) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                searchAMeal(newText);
-                return false;
-            }
-        });
-
-
-    }
-
-    private boolean searchAMeal(String text) {
-
-        // Использование segmented button для выбора между поиском по названию блюда или по ингредиенту
-        MaterialButtonToggleGroup toggleGroup = findViewById(R.id.toggleButton);
-
-        toggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-            if (checkedId == R.id.buttonSearchByMeal) {
-                searchByMeal(text);
-            } else if (checkedId == R.id.buttonSearchByIngredient) {
-                searchByIngredient(text);
-            }
-        });
-
-
-        return false;
+//        searchView = findViewById(R.id.searchView);
+//
+//        // Обработка событий поиска
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//                if (searchAMeal(query)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                searchAMeal(newText);
+//                return false;
+//            }
+//        });
+//
+//
+//    }
+//
+//    private boolean searchAMeal(String text) {
+//
+//        // Использование segmented button для выбора между поиском по названию блюда или по ингредиенту
+//        MaterialButtonToggleGroup toggleGroup = findViewById(R.id.toggleButton);
+//
+//        toggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+//            if (checkedId == R.id.buttonSearchByMeal) {
+//                searchByMeal(text);
+//            } else if (checkedId == R.id.buttonSearchByIngredient) {
+//                searchByIngredient(text);
+//            }
+//        });
+//
+//
+//        return false;
+//    }
     }
 
     private void searchByIngredient(String ingredient) {

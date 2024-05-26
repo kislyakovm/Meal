@@ -2,6 +2,7 @@ package com.example.meal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -47,7 +48,6 @@ public class MealPageActivity extends AppCompatActivity {
         dishPageTitleTextView.setText(getIntent().getStringExtra("name"));
         dishPageCategoryTextView.setText(getIntent().getStringExtra("category"));
         dishPageInstructionTextView.setText(getIntent().getStringExtra("instructions"));
-//        dishPageIngredientsRecyclerView.setAdapter(getIntent().getStringExtra("ingredients"));
 
         ArrayList<String> ingredients = getIntent().getStringArrayListExtra("ingredients");
         if (ingredients != null) {
@@ -62,7 +62,8 @@ public class MealPageActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.worldButton);
+//        bottomNavigationView.setSelectedItemId(R.id.worldButton);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
             int itemId = item.getItemId();

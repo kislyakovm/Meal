@@ -2,7 +2,9 @@ package com.example.meal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +32,7 @@ public class DishListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private DishAdapter dishAdapter;
-    private ArrayList<Dish> dishes  = new ArrayList<>();
+    private ArrayList<Dish> dishes = new ArrayList<>();
     private RequestQueue requestQueue;
 
     @Override
@@ -56,7 +58,8 @@ public class DishListActivity extends AppCompatActivity {
         getDishesByLink(url);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.worldButton);
+//        bottomNavigationView.setSelectedItemId(R.id.worldButton);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
             int itemId = item.getItemId();
@@ -76,6 +79,7 @@ public class DishListActivity extends AppCompatActivity {
 
     private void getMealByID(String id) {
         String url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
+
         RequestQueue requestQueueMeal;
         requestQueueMeal = Volley.newRequestQueue(this);
 
@@ -125,10 +129,6 @@ public class DishListActivity extends AppCompatActivity {
                         recyclerView.setAdapter(dishAdapter);
                     }
 
-                    for (Dish dish1: dishes) System.out.println("---- " + dish1.getName());
-                    System.out.println();
-                    System.out.println();
-
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -151,23 +151,18 @@ public class DishListActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = jsonObject.getJSONArray("meals");
                     for (int i = 0; i < jsonArray.length(); i++) {
-
-
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         String id = jsonObject1.getString("idMeal");
                         getMealByID(id);
-                        System.out.println("*** " + dishes);
-                        System.out.println(jsonObject1.getString("strMeal"));
                     }
-
                     dishAdapter = new DishAdapter(DishListActivity.this, dishes);
-                    System.out.println(dishes.size());
-                    for (Dish dish1: dishes) System.out.println("---- " + dish1.getName());
-                    System.out.println();
-                    System.out.println();
                     recyclerView.setAdapter(dishAdapter);
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    Intent intent = new Intent(DishListActivity.this, FindActivity.class);
+                    startActivity(intent);
+
+                    // Отображение Toast с сообщением "There is no such ingredient"
+                    Toast.makeText(DishListActivity.this, "There is no such ingredient", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
