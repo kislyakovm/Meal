@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Meal</string>
+    <string name="WorldsFood">World\'s food</string>
+    <string name="country">country</string>
+    <string name="name">Name</string>
+    <string name="category">Category</string>
+    <string name="dishImageDescription">dish image</string>
+    <string name="countryImageDescription">Country flag</string>
+    <string name="instruction">Instruction</string>
+    <string name="random_button">random button</string>
+    <string name="search_by_ingredient">Search by ingredient</string>
+    <string name="enter_by_ingredient">Enter the ingredient</string>
+    <string name="search">search</string>
 </resources>
