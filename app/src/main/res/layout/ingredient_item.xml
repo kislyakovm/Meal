@@ -9,7 +9,7 @@
         android:id="@+id/ingredientTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ingredient"
+        android:text="@string/ingredient"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
         android:textSize="16sp"
