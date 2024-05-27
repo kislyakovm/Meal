@@ -1,4 +1,4 @@
-package com.example.meal;
+package com.example.meal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meal.model.Country;
+import com.example.meal.DishListActivity;
+import com.example.meal.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.meal;
+package com.example.meal.model;
 
 import java.util.ArrayList;
 
