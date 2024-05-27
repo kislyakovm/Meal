@@ -8,7 +8,7 @@
     <item
         android:id="@+id/randomButton"
         android:enabled="true"
-        android:icon="@drawable/ic_random"
+        android:icon="@drawable/ic_dice"
         android:title="random" />
 
     <item

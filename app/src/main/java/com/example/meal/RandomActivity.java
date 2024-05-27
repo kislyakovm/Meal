@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RandomActivity extends AppCompatActivity {
     Dish dish = new Dish();
@@ -49,7 +47,7 @@ public class RandomActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         getRandomDish();
 
-        // Работа с нижним меню
+        // Работа с нижним меню.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.randomButton);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
