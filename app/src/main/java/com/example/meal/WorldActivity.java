@@ -28,7 +28,14 @@ public class WorldActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // объяснить почему так, а не через полчение всех стран (нет связи названия с картинкой. А в дальнейшем хотел бы свой API и там уже чтобы был норм доступ)
+
+        // Массив countries заполняется таким "топорным" вариантом, т.к. нет четкой связи
+        // между названием страны и ссылкой для получения изображения ее флага. API сайта
+        // не дает такого варианта. Связь между картинками не явная (по краткому названию страны)
+        // American = us, British = gb и т.д. В дальнейшем думаю сделать свой сайт с API на
+        // Spring и переработать этот и некоторые другие вещи
+        // P.s. если предложите вариант как сделать этот код с countries лучше (без изменения API), буду рад!
+
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/us.png","American"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/gb.png", "British"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/ca.png","Canadian"));
@@ -63,11 +70,10 @@ public class WorldActivity extends AppCompatActivity {
         countryAdapter = new CountryAdapter(WorldActivity.this, countries);
         recyclerView.setAdapter(countryAdapter);
 
-
+        // Работа с нижним меню
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.worldButton);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-
             int itemId = item.getItemId();
             if (itemId == R.id.listButton) {
                 startActivity(new Intent(this, MainActivity.class));

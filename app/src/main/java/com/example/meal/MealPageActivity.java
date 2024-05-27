@@ -37,18 +37,21 @@ public class MealPageActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Идентифицирование элементов на макете
         dishPageImageView = findViewById(R.id.dishPageImageView);
         dishPageTitleTextView = findViewById(R.id.dishPageTitleTextView);
         dishPageCategoryTextView = findViewById(R.id.dishPageCategoryTextView);
         dishPageInstructionTextView = findViewById(R.id.dishPageInstructionTextView);
         dishPageIngredientsListView = findViewById(R.id.dishPageIngredientsRecyclerView);
 
+        // Заполнение элементов на макете
         Picasso.get().load(getIntent().getStringExtra("picture")).fit().centerCrop().into(dishPageImageView);
         dishPageImageView.setImageResource(getIntent().getIntExtra("picture", 0));
         dishPageTitleTextView.setText(getIntent().getStringExtra("name"));
         dishPageCategoryTextView.setText(getIntent().getStringExtra("category"));
         dishPageInstructionTextView.setText(getIntent().getStringExtra("instructions"));
 
+        // Заполнение ингредиентов через стандартный ArrayAdapter
         ArrayList<String> ingredients = getIntent().getStringArrayListExtra("ingredients");
         if (ingredients != null) {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -59,13 +62,10 @@ public class MealPageActivity extends AppCompatActivity {
             dishPageIngredientsListView.setAdapter(adapter);
         }
 
-
-
+        // Работа с нижним меню
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setSelectedItemId(R.id.worldButton);
-
+        // bottomNavigationView.setSelectedItemId(R.id.worldButton);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-
             int itemId = item.getItemId();
             if (itemId == R.id.listButton) {
                 startActivity(new Intent(this, MainActivity.class));
@@ -78,6 +78,5 @@ public class MealPageActivity extends AppCompatActivity {
             }
             return true;
         });
-
     }
 }

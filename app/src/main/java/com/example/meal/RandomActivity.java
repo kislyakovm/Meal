@@ -49,10 +49,10 @@ public class RandomActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         getRandomDish();
 
+        // Работа с нижним меню
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.randomButton);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-
             int itemId = item.getItemId();
             if (itemId == R.id.listButton) {
                 startActivity(new Intent(this, MainActivity.class));
@@ -69,7 +69,12 @@ public class RandomActivity extends AppCompatActivity {
     }
 
     private void getRandomDish() {
+        /**
+         * Метод для получения данных с сайта для рандомного блюда
+         */
         String url = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+        // Получение данных по ссылке через API
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -77,10 +82,10 @@ public class RandomActivity extends AppCompatActivity {
                     JSONArray jsonArray = jsonObject.getJSONArray("meals");
                     JSONObject jsonObject1 = jsonArray.getJSONObject(0);
 
-
                     String id, name, category, area, instructions, picture, tag;
                     ArrayList<String> ingredients = new ArrayList<>();
 
+                    // Получение данных с сайта
                     id = jsonObject1.getString("idMeal");
                     name = jsonObject1.getString("strMeal");
                     category = jsonObject1.getString("strCategory");
@@ -89,7 +94,7 @@ public class RandomActivity extends AppCompatActivity {
                     picture = jsonObject1.getString("strMealThumb");
                     tag = jsonObject1.getString("strTags");
 
-
+                    // Получение ингредиентов  с сайта
                     String ingredient;
                     for (int j = 1; j <= 15; j++) {
                         ingredient = jsonObject1.getString("strIngredient" + j) + " " + jsonObject1.getString("strMeasure" + j);
@@ -98,6 +103,7 @@ public class RandomActivity extends AppCompatActivity {
                         } else break;
                     }
 
+                    // Создание и заполнение полей нового блюда
                     dish.setId(id);
                     dish.setName(name);
                     dish.setCategory(category);
@@ -111,12 +117,14 @@ public class RandomActivity extends AppCompatActivity {
                     TextView dishRandomTitleTextView, dishRandomCategoryTextView, dishRandomInstructionTextView;
                     ListView dishPageIngredientsListView;
 
+                    // Идентифицирование элементов на макете
                     dishRandomImageView = findViewById(R.id.dishRandomImageView);
                     dishRandomTitleTextView = findViewById(R.id.dishRandomTitleTextView);
                     dishRandomCategoryTextView = findViewById(R.id.dishRandomCategoryTextView);
                     dishRandomInstructionTextView = findViewById(R.id.dishRandomInstructionTextView);
                     dishPageIngredientsListView = findViewById(R.id.dishRandomIngredientsTextView);
 
+                    // Заполнение элементов на макете
                     Picasso.get().load(dish.getPicture()).fit().centerCrop().into(dishRandomImageView);
                     dishRandomTitleTextView.setText(dish.getName());
                     dishRandomCategoryTextView.setText(dish.getCategory());
@@ -141,6 +149,10 @@ public class RandomActivity extends AppCompatActivity {
     }
 
     public void nextButton(View view) {
+        /**
+         * Метод по выбору другого рандомного блюда. Пока просто заново вызывается RandomActivity.
+         * В дальнейшем планириую это переработать, но пока нет идей как
+         */
         Intent intent = new Intent(this, RandomActivity.class);
         startActivity(intent);
     }

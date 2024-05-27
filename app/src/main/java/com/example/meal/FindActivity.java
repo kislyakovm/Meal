@@ -38,6 +38,7 @@ public class FindActivity extends AppCompatActivity {
         searchEditText = findViewById(R.id.searchEditText);
         Button searchButton = findViewById(R.id.searchButton);
 
+        // Передача поискового запроса в DishListActivity
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +53,10 @@ public class FindActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
+        // Работа с нижним меню
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.findButton);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-
             int itemId = item.getItemId();
             if (itemId == R.id.listButton) {
                 startActivity(new Intent(this, MainActivity.class));
@@ -68,50 +69,11 @@ public class FindActivity extends AppCompatActivity {
             }
             return true;
         });
-
-//        searchView = findViewById(R.id.searchView);
-//
-//        // Обработка событий поиска
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//
-//                if (searchAMeal(query)) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                searchAMeal(newText);
-//                return false;
-//            }
-//        });
-//
-//
-//    }
-//
-//    private boolean searchAMeal(String text) {
-//
-//        // Использование segmented button для выбора между поиском по названию блюда или по ингредиенту
-//        MaterialButtonToggleGroup toggleGroup = findViewById(R.id.toggleButton);
-//
-//        toggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-//            if (checkedId == R.id.buttonSearchByMeal) {
-//                searchByMeal(text);
-//            } else if (checkedId == R.id.buttonSearchByIngredient) {
-//                searchByIngredient(text);
-//            }
-//        });
-//
-//
-//        return false;
-//    }
     }
 
+
+    // Пока данные методы не работают. В дальнейшем планируется разветвление поиска
+    // на поиск по ингредиенту и поиск по названию блюда
     private void searchByIngredient(String ingredient) {
         String url = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient;
     }

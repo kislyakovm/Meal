@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // "стабилзация" размеров. Без этого на макете расплывались размеры
         recyclerView = findViewById(R.id.recycleViewDish);
         int height = recyclerView.getHeight();
         recyclerView.getLayoutParams().height = height;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         getDishesByLetter("b");
 
+        // Работа с нижним меню
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.listButton);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -74,8 +76,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getDishesByLetter(String letter) {
+        /**
+         * Метод по получению рецептов по первой букве названия
+         */
         String url = "https://www.themealdb.com/api/json/v1/1/search.php?f=" + letter;
 
+        // Получение данных по ссылке через API
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         String id, name, category, area, instructions, picture, tag;
                         ArrayList<String> ingredients = new ArrayList<>();
 
+                        // Получение данных с сайта
                         id = jsonObject1.getString("idMeal");
                         name = jsonObject1.getString("strMeal");
                         category = jsonObject1.getString("strCategory");
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         picture = jsonObject1.getString("strMealThumb");
                         tag = jsonObject1.getString("strTags");
 
-
+                        // Получение ингредиентов  с сайта
                         String ingredient;
                         for (int j = 1; j <= 15; j++) {
                             ingredient = jsonObject1.getString("strIngredient" + j) + " " + jsonObject1.getString("strMeasure" + j);
@@ -105,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                             } else break;
                         }
 
+                        // Создание и заполнение полей нового блюда
                         Dish dish = new Dish();
                         dish.setId(id);
                         dish.setName(name);

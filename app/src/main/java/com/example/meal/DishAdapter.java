@@ -33,6 +33,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DishViewHolder holder, int position) {
+        // Получение информации по элементам для заполнения карточек
         Dish currentDish = dishes.get(position);
 
         String image = currentDish.getPicture();
@@ -43,11 +44,12 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         String tag = currentDish.getTag();
         ArrayList<String> ingredients = currentDish.getIngredients();
 
+        // Заполнение элементов на макете
         holder.nameTextView.setText(name);
         holder.categoryTextView.setText(category);
-
         Picasso.get().load(image).fit().centerCrop().into(holder.imageView);
 
+        // Передача данных в MealPageActivity через Intent
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

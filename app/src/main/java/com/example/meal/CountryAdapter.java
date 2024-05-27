@@ -36,7 +36,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     public void onBindViewHolder(@NonNull CountryViewHolder holder, int position) {
         Country currentCountry = countries.get(position);
 
-//        int imageId = context.getResources().getIdentifier(currentCountry.getFlagUrl(), "drawable", context.getPackageName());
         String flagUrl = currentCountry.getFlagUrl();
         String countryName = currentCountry.getCountryName();
 

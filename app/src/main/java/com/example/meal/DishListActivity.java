@@ -46,20 +46,21 @@ public class DishListActivity extends AppCompatActivity {
             return insets;
         });
 
+        // "стабилзация" размеров. Без этого на макете расплывались размеры
         recyclerView = findViewById(R.id.recycleViewDishList);
         int height = recyclerView.getHeight();
         recyclerView.getLayoutParams().height = height;
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // получение ссылки из Intent
         requestQueue = Volley.newRequestQueue(this);
         String url = getIntent().getStringExtra("url");
         System.out.println(url);
         getDishesByLink(url);
 
+        // Работа с нижним меню
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setSelectedItemId(R.id.worldButton);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
             int itemId = item.getItemId();
@@ -78,11 +79,15 @@ public class DishListActivity extends AppCompatActivity {
     }
 
     private void getMealByID(String id) {
+        /**
+         * Получение рецепта по id (через API). Создание нового объекта (рецепта) и заполнение полей в нем.
+         */
         String url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
 
         RequestQueue requestQueueMeal;
         requestQueueMeal = Volley.newRequestQueue(this);
 
+        // Получение данных по ссылке через API
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -94,6 +99,7 @@ public class DishListActivity extends AppCompatActivity {
                     String id, name, category, area, instructions, picture, tag;
                     ArrayList<String> ingredients = new ArrayList<>();
 
+                    // Получение данных с сайта
                     id = jsonObject1.getString("idMeal");
                     name = jsonObject1.getString("strMeal");
                     category = jsonObject1.getString("strCategory");
@@ -102,7 +108,7 @@ public class DishListActivity extends AppCompatActivity {
                     picture = jsonObject1.getString("strMealThumb");
                     tag = jsonObject1.getString("strTags");
 
-
+                    // Получение ингредиентов  с сайта
                     String ingredient;
                     for (int j = 1; j <= 15; j++) {
                         ingredient = jsonObject1.getString("strIngredient" + j) + " " + jsonObject1.getString("strMeasure" + j);
@@ -111,6 +117,7 @@ public class DishListActivity extends AppCompatActivity {
                         } else break;
                     }
 
+                    // Создание и заполнение полей нового блюда
                     Dish dish = new Dish();
                     dish.setId(id);
                     dish.setName(name);
@@ -140,11 +147,14 @@ public class DishListActivity extends AppCompatActivity {
                 volleyError.printStackTrace();
             }
         });
-        System.out.println("111111111111111 " + dishes);
         requestQueueMeal.add(request);
     }
 
     private void getDishesByLink(String url) {
+        /**
+         * Метод для получения блюд по ссылке через API. Пока используется для получения блюд по
+         * названию / стране. В дальнейшем будет расширение по поулчению блюд по категориям
+         */
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -158,6 +168,7 @@ public class DishListActivity extends AppCompatActivity {
                     dishAdapter = new DishAdapter(DishListActivity.this, dishes);
                     recyclerView.setAdapter(dishAdapter);
                 } catch (JSONException e) {
+                    // Если такой ссылки нет - переход на страницу с поиском и вывод сообщения об этом.
                     Intent intent = new Intent(DishListActivity.this, FindActivity.class);
                     startActivity(intent);
 
