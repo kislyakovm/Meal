@@ -2,6 +2,7 @@ package com.example.meal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -109,10 +110,13 @@ public class DishListActivity extends AppCompatActivity {
                     tag = jsonObject1.getString("strTags");
 
                     // Получение ингредиентов  с сайта
-                    String ingredient;
+                    String ingredient, measure, ingredientName;
                     for (int j = 1; j <= 15; j++) {
-                        ingredient = jsonObject1.getString("strIngredient" + j) + " " + jsonObject1.getString("strMeasure" + j);
-                        if (ingredient != null) {
+                        measure = jsonObject1.optString("strMeasure" + j);
+                        ingredientName = jsonObject1.optString("strIngredient" + j);
+
+                        if (!TextUtils.isEmpty(measure) && !TextUtils.isEmpty(ingredientName)) {
+                            ingredient = ingredientName + " " + measure;
                             ingredients.add(ingredient);
                         } else break;
                     }

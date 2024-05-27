@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class MealPageActivity extends AppCompatActivity {
     ImageView dishPageImageView;
     TextView dishPageTitleTextView, dishPageCategoryTextView, dishPageInstructionTextView;
-    ListView dishPageIngredientsListView;
+    RecyclerView dishPageIngredientsRecyclerView;
 
 
     @Override
@@ -42,7 +43,7 @@ public class MealPageActivity extends AppCompatActivity {
         dishPageTitleTextView = findViewById(R.id.dishPageTitleTextView);
         dishPageCategoryTextView = findViewById(R.id.dishPageCategoryTextView);
         dishPageInstructionTextView = findViewById(R.id.dishPageInstructionTextView);
-        dishPageIngredientsListView = findViewById(R.id.dishPageIngredientsRecyclerView);
+        dishPageIngredientsRecyclerView = findViewById(R.id.dishPageIngredientsRecyclerView);
 
         // Заполнение элементов на макете
         Picasso.get().load(getIntent().getStringExtra("picture")).fit().centerCrop().into(dishPageImageView);
@@ -51,15 +52,12 @@ public class MealPageActivity extends AppCompatActivity {
         dishPageCategoryTextView.setText(getIntent().getStringExtra("category"));
         dishPageInstructionTextView.setText(getIntent().getStringExtra("instructions"));
 
-        // Заполнение ингредиентов через стандартный ArrayAdapter
+        // Заполнение ингредиентов через IngredientAdapter
         ArrayList<String> ingredients = getIntent().getStringArrayListExtra("ingredients");
         if (ingredients != null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                    this,
-                    android.R.layout.simple_list_item_1,
-                    ingredients
-            );
-            dishPageIngredientsListView.setAdapter(adapter);
+            IngredientAdapter ingredientAdapter = new IngredientAdapter(this, ingredients);
+            dishPageIngredientsRecyclerView.setAdapter(ingredientAdapter);
+            dishPageIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
 
         // Работа с нижним меню

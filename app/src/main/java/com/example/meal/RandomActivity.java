@@ -2,6 +2,7 @@ package com.example.meal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -93,12 +96,21 @@ public class RandomActivity extends AppCompatActivity {
                     tag = jsonObject1.getString("strTags");
 
                     // Получение ингредиентов  с сайта
-                    String ingredient;
+                    String ingredient, measure, ingredientName;
                     for (int j = 1; j <= 15; j++) {
-                        ingredient = jsonObject1.getString("strIngredient" + j) + " " + jsonObject1.getString("strMeasure" + j);
-                        if (ingredient != null) {
+                        measure = jsonObject1.optString("strMeasure" + j);
+                        ingredientName = jsonObject1.optString("strIngredient" + j);
+
+                        if (!TextUtils.isEmpty(measure) && !TextUtils.isEmpty(ingredientName)) {
+                            ingredient = ingredientName + " " + measure;
                             ingredients.add(ingredient);
                         } else break;
+
+//
+//                        ingredient = jsonObject1.optString("strIngredient" + j) + " " + jsonObject1.optString("strMeasure" + j);
+//                        if (!TextUtils.isEmpty(ingredient)) {
+//                            ingredients.add(ingredient);
+//                        } else break;
                     }
 
                     // Создание и заполнение полей нового блюда
@@ -113,14 +125,14 @@ public class RandomActivity extends AppCompatActivity {
 
                     ImageView dishRandomImageView;
                     TextView dishRandomTitleTextView, dishRandomCategoryTextView, dishRandomInstructionTextView;
-                    ListView dishPageIngredientsListView;
+                    RecyclerView dishPageIngredientsRecyclerView;
 
                     // Идентифицирование элементов на макете
                     dishRandomImageView = findViewById(R.id.dishRandomImageView);
                     dishRandomTitleTextView = findViewById(R.id.dishRandomTitleTextView);
                     dishRandomCategoryTextView = findViewById(R.id.dishRandomCategoryTextView);
                     dishRandomInstructionTextView = findViewById(R.id.dishRandomInstructionTextView);
-                    dishPageIngredientsListView = findViewById(R.id.dishRandomIngredientsTextView);
+                    dishPageIngredientsRecyclerView = findViewById(R.id.dishRandomIngredientsTextView);
 
                     // Заполнение элементов на макете
                     Picasso.get().load(dish.getPicture()).fit().centerCrop().into(dishRandomImageView);
@@ -128,9 +140,12 @@ public class RandomActivity extends AppCompatActivity {
                     dishRandomCategoryTextView.setText(dish.getCategory());
                     dishRandomInstructionTextView.setText(dish.getInstructions());
 
+                    // Заполнение ингредиентов через IngredientAdapter
                     if (ingredients != null) {
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(RandomActivity.this, android.R.layout.simple_list_item_1, ingredients);
-                        dishPageIngredientsListView.setAdapter(adapter);
+                        IngredientAdapter ingredientAdapter = new IngredientAdapter(RandomActivity.this, ingredients);
+                        dishPageIngredientsRecyclerView.setAdapter(ingredientAdapter);
+                        dishPageIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(RandomActivity.this));
+
                     }
 
                 } catch (JSONException e) {

@@ -7,93 +7,100 @@
     android:layout_height="wrap_content"
     tools:context=".RandomActivity">
 
-    <RelativeLayout
-        android:id="@+id/constraintLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/linearLayout"
-        android:layout_alignParentTop="true">
+        android:layout_height="match_parent"
+        android:layout_above="@id/linearLayout">
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
+        <RelativeLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="20dp"
-                app:strokeColor="@color/textColor"
-                app:strokeWidth="2dp">
-
-                <ImageView
-                    android:id="@+id/dishRandomImageView"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:contentDescription="@string/dishImageDescription"
-                    android:src="@mipmap/ic_launcher" />
-            </com.google.android.material.card.MaterialCardView>
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@id/materialCardView"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/dishRandomTitleTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/name"
-                    android:textColor="@color/textColor"
-                    android:textSize="24sp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:strokeColor="@color/textColor"
+                    app:strokeWidth="2dp">
 
-                <TextView
-                    android:id="@+id/dishRandomCategoryTextView"
+                    <ImageView
+                        android:id="@+id/dishRandomImageView"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:contentDescription="@string/dishImageDescription"
+                        android:src="@mipmap/ic_launcher" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@string/category"
-                    android:textColor="@color/textColor"
-                    android:textSize="18sp" />
+                    android:layout_height="200dp"
+                    android:layout_below="@id/materialCardView"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/dishRandomTitleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/name"
+                        android:textColor="@color/textColor"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/dishRandomCategoryTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/category"
+                        android:textColor="@color/textColor"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/dishRandomInstructionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLayout3"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/instruction"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/dishRandomInstructionTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linearLayout3"
-            android:layout_marginVertical="16dp"
-            android:paddingHorizontal="16dp"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/instruction"
-            android:textColor="@color/textColor"
-            android:textSize="16sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dishRandomIngredientsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dishRandomInstructionTextView"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:descendantFocusability="blocksDescendants" />
 
-        <ListView
-            android:id="@+id/dishRandomIngredientsTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/dishRandomInstructionTextView"
-            android:paddingHorizontal="16dp"
-            android:layout_marginTop="8dp"
-            android:descendantFocusability="blocksDescendants" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </ScrollView>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/nextButton"
