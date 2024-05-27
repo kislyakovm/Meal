@@ -62,8 +62,9 @@ public class WorldActivity extends AppCompatActivity {
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/th.png","Thai"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/tn.png","Tunisian"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/tr.png","Turkish"));
+        countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/UA.png","Ukrainian"));
         countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/vn.png","Vietnamese"));
-        countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/no.png","Other"));
+//        countries.add(new Country("https://www.themealdb.com/images/icons/flags/big/64/no.png","Other"));
 
         recyclerView = findViewById(R.id.recyclerViewWorld);
 

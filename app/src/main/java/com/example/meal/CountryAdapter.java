@@ -46,7 +46,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DishListActivity.class);
-                intent.putExtra("url", "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + countryName);
+
+                if ("other".equals(countryName)) {
+                    intent.putExtra("url", "https://www.themealdb.com/api/json/v1/1/filter.php?a=Unknown");
+                } else {
+                    intent.putExtra("url", "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + countryName);
+                }
 
                 context.startActivity(intent);
             }
