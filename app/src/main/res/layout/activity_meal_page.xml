@@ -74,7 +74,8 @@
             android:id="@+id/dishPageInstructionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="16dp"
             android:fontFamily="@font/montserrat"
             android:text="@string/instruction"
             android:textColor="@color/textColor"
@@ -87,7 +88,8 @@
             android:id="@+id/dishPageIngredientsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dishPageInstructionTextView" />
@@ -105,6 +107,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            app:labelVisibilityMode="labeled"
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

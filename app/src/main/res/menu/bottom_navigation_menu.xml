@@ -3,23 +3,23 @@
         android:id="@+id/listButton"
         android:enabled="true"
         android:icon="@drawable/ic_menu"
-        android:title="list" />
+        android:title="@string/list" />
 
     <item
         android:id="@+id/randomButton"
         android:enabled="true"
         android:icon="@drawable/ic_dice"
-        android:title="random" />
+        android:title="@string/random" />
 
     <item
         android:id="@+id/findButton"
         android:enabled="true"
         android:icon="@drawable/ic_find"
-        android:title="search"/>
+        android:title="@string/search"/>
 
     <item
         android:id="@+id/worldButton"
         android:enabled="true"
         android:icon="@drawable/ic_world"
-        android:title="international"/>
+        android:title="@string/international"/>
 </menu>

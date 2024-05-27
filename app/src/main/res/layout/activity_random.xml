@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dishRandomInstructionTextView"
             android:paddingHorizontal="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:descendantFocusability="blocksDescendants" />
 
     </RelativeLayout>
@@ -114,6 +114,7 @@
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            app:labelVisibilityMode="labeled"
             android:id="@+id/bottom_navigation"
             style="@style/Widget.App.BottomNavigationView"
             android:layout_width="match_parent"

@@ -11,4 +11,7 @@
     <string name="search_by_ingredient">Search by ingredient</string>
     <string name="enter_by_ingredient">Enter the ingredient</string>
     <string name="search">search</string>
+    <string name="list">list</string>
+    <string name="random">random</string>
+    <string name="international">international</string>
 </resources>
