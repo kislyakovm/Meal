@@ -21,8 +21,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup;
 public class FindActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-//    private SearchView searchView;
-        private EditText searchEditText;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +34,29 @@ public class FindActivity extends AppCompatActivity {
             return insets;
         });
 
-        searchEditText = findViewById(R.id.searchEditText);
+        searchView = findViewById(R.id.searchView);
+        // Listener на панель поиска
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                performSearch(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         Button searchButton = findViewById(R.id.searchButton);
 
         // Передача поискового запроса в DishListActivity
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchText = searchEditText.getText().toString();
-
-                Intent intent = new Intent(FindActivity.this, DishListActivity.class);
-                intent.putExtra("url", "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + searchText);
-
-                startActivity(intent);
+                String query = searchView.getQuery().toString();
+                performSearch(query);
             }
         });
 
@@ -71,6 +80,15 @@ public class FindActivity extends AppCompatActivity {
         });
     }
 
+    private void performSearch(String query) {
+        /**
+         * Метод осуществляет передачу url в DishListActivity для выполнения поиска
+         */
+        Intent intent = new Intent(FindActivity.this, DishListActivity.class);
+        intent.putExtra("url", "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + query);
+
+        startActivity(intent);
+    }
 
     // Пока данные методы не работают. В дальнейшем планируется разветвление поиска
     // на поиск по ингредиенту и поиск по названию блюда
